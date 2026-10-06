@@ -47,7 +47,7 @@ prev === missions.length - 1 ? 0 : prev + 1
 };
 
 return ( <div className="mission-system"> <div className="mission-system-header"> <span>SYSTEM</span> <span>01:26</span> </div>
-
+  
   <div className="mission-system-title">
     CURRENT MISSIONS
   </div>

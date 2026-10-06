@@ -1,5 +1,6 @@
 "use client";
 
+import BackHome from "@/components/BackHome";
 import { portfolio } from "@/data/portfolio";
 
 const skills = [
@@ -40,6 +41,8 @@ const overallLevel = 100;
 export default function About() {
   return (
     <main className="shadow-page">
+      <BackHome />
+
       <div className="shadow-bg" />
       <div className="shadow-grid" />
 
@@ -135,7 +138,7 @@ export default function About() {
 
             <div className="attribute-window-top">
               <span>PLAYER ATRIBUT</span>
-              </div>
+            </div>
 
             {/* MAIN LEVEL */}
             <div className="overall-level-box">
@@ -170,9 +173,10 @@ export default function About() {
                   key={skill.name}
                 >
                   <div className="attribute-type">
-                        <strong>
+                    <strong>
                       {skill.short}
                     </strong>
+
                     <span>
                       {skill.name}
                     </span>

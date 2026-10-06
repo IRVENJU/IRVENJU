@@ -14,11 +14,20 @@ const links = [
 ];
 
 export default function Navbar() {
-  const [starting, setStarting] = useState(false);
+ const [starting, setStarting] = useState(false);
+const [startCover, setStartCover] = useState(false);
   const [active, setActive] = useState("START");
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
   const [showMission, setShowMission] = useState(false);
+  const [missionLoading, setMissionLoading] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
+useEffect(() => {
+  const hasEntered = sessionStorage.getItem("system-entered");
+
+  if (hasEntered === "true") {
+    setShowIntro(false);
+  }
+}, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -34,15 +43,23 @@ export default function Navbar() {
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
-
 const handleClick = (label: string) => {
-  if (label === "START" && !starting) {
+  if (label === "START" && !starting && !missionLoading) {
     setStarting(true);
+    setStartCover(true);
 
+    // Fade hitam
     setTimeout(() => {
-      setShowMission(true);
       setStarting(false);
+      setStartCover(false);
+      setMissionLoading(true);
     }, 700);
+
+    // Loading selesai → Mission
+    setTimeout(() => {
+      setMissionLoading(false);
+      setShowMission(true);
+    }, 2700);
   }
 };
   const navigate = (href: string) => {
@@ -69,12 +86,12 @@ const handleClick = (label: string) => {
       <div className="game-overlay" />
 
       {/* MAIN MENU */}
-  {!showMission && !showIntro && (
-  <div
-    className={`game-ui ${
-      starting ? "system-starting" : ""
-    }`}
-  >
+      {!showMission && !showIntro && (
+        <div
+          className={`game-ui ${
+            starting ? "system-starting" : ""
+          }`}
+        >
           <div className="game-title">
             <span className="game-title-small">
               GAMEDEV ENTHUSIAST
@@ -140,24 +157,33 @@ const handleClick = (label: string) => {
         />
       )}
 
-      {/* START → MISSION TRANSITION */}
-      {starting && (
-        <div className="start-sequence-text">
-          <div className="start-sequence-line" />
+      {/* START → BLACK FADE */}
+{startCover && <div className="start-sequence" />}
 
-          <div className="start-sequence-text">
-            <span>SYSTEM ACTIVATED</span>
-            <strong>WELCOME, PLAYER.</strong>
-          </div>
-        </div>
-      )}
+{/* MISSION LOADING */}
+{missionLoading && (
+  <div className="mission-loading">
+    <div className="mission-loading-label">
+      LOADING MISSION...
+    </div>
 
-      {/* MISSION SYSTEM */}
-      {showMission && (
-        <MissionSystem
-          onContinue={() => setShowMission(false)}
-        />
-      )}
+    <div className="mission-loading-bar">
+      <div className="mission-loading-fill" />
+    </div>
+
+    <div className="mission-loading-status">
+      <span>SYSTEM PROCESSING</span>
+      <span>100%</span>
+    </div>
+  </div>
+)}
+
+{/* MISSION SYSTEM */}
+{showMission && (
+  <MissionSystem
+    onContinue={() => setShowMission(false)}
+  />
+)}
 
       {/* BACKGROUND CREDIT */}
       <div className="background-credit">
@@ -167,9 +193,12 @@ const handleClick = (label: string) => {
 
       {/* INITIAL SYSTEM */}
       {showIntro && (
-        <SystemIntro
-          onStart={() => setShowIntro(false)}
-        />
+       <SystemIntro
+  onStart={() => {
+    sessionStorage.setItem("system-entered", "true");
+    setShowIntro(false);
+  }}
+/>
       )}
     </>
   );
