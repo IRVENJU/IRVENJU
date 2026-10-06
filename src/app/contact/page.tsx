@@ -8,8 +8,7 @@ export default function Contact() {
       <h1 className="mt-5 text-5xl md:text-7xl font-semibold tracking-[-.05em]">Let's Connect.</h1>
 
       <p className="max-w-xl text-zinc-500 leading-7 mt-8">
-        Have a project, collaboration, or just want to talk about technology?
-        Replace these links with your real contact information.
+       ingin berkolaborasi, atau sekadar ingin mengobrol tentang teknologi? just call me
       </p>
 
       <div className="grid sm:grid-cols-3 gap-4 mt-14 max-w-3xl">

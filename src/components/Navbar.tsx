@@ -1,11 +1,12 @@
 "use client";
 
+import SystemIntro from "./SystemIntro";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MissionSystem from "./MissionSystem";
 
 const links = [
-  ["PLAY", "/"],
+  ["START", "/"],
   ["ABOUT", "/about"],
   ["PROJECTS", "/projects"],
   ["EXPERIENCE", "/experience"],
@@ -13,9 +14,11 @@ const links = [
 ];
 
 export default function Navbar() {
-  const [active, setActive] = useState("PLAY");
+  const [starting, setStarting] = useState(false);
+  const [active, setActive] = useState("START");
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
   const [showMission, setShowMission] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -32,12 +35,16 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleClick = (label: string) => {
-    if (label === "PLAY") {
-      setShowMission(true);
-    }
-  };
+const handleClick = (label: string) => {
+  if (label === "START" && !starting) {
+    setStarting(true);
 
+    setTimeout(() => {
+      setShowMission(true);
+      setStarting(false);
+    }, 700);
+  }
+};
   const navigate = (href: string) => {
     window.dispatchEvent(
       new CustomEvent("page-transition", {
@@ -48,6 +55,7 @@ export default function Navbar() {
 
   return (
     <>
+      {/* BACKGROUND */}
       <video
         className="game-wallpaper"
         autoPlay
@@ -60,16 +68,22 @@ export default function Navbar() {
 
       <div className="game-overlay" />
 
-      {!showMission && (
-        <div className="game-ui">
+      {/* MAIN MENU */}
+  {!showMission && !showIntro && (
+  <div
+    className={`game-ui ${
+      starting ? "system-starting" : ""
+    }`}
+  >
           <div className="game-title">
             <span className="game-title-small">
-              my frist web
+              GAMEDEV ENTHUSIAST
             </span>
 
             <h1>IRVENJU</h1>
+
             <span className="game-title-sub">
-              PERSONAL ARCHIVE
+              PERSONAL PORTFOLIO
             </span>
           </div>
 
@@ -86,7 +100,8 @@ export default function Navbar() {
                   }`}
                   onMouseEnter={() => setActive(label)}
                   onClick={(e) => {
-                    if (label === "PLAY") {
+                    if (label === "START") {
+                      e.preventDefault();
                       handleClick(label);
                       return;
                     }
@@ -108,13 +123,14 @@ export default function Navbar() {
           </div>
 
           <div className="game-status">
-            <span>● ONLINE</span>
-            <span>v05.10.26</span>
+            <span>ONLINE</span>
+            <span>V.05.10.26</span>
           </div>
         </div>
       )}
 
-      {!showMission && (
+      {/* CURSOR */}
+      {!showMission && !showIntro && !starting && (
         <div
           className="game-cursor-glow"
           style={{
@@ -124,9 +140,35 @@ export default function Navbar() {
         />
       )}
 
+      {/* START → MISSION TRANSITION */}
+      {starting && (
+        <div className="start-sequence-text">
+          <div className="start-sequence-line" />
+
+          <div className="start-sequence-text">
+            <span>SYSTEM ACTIVATED</span>
+            <strong>WELCOME, PLAYER.</strong>
+          </div>
+        </div>
+      )}
+
+      {/* MISSION SYSTEM */}
       {showMission && (
         <MissionSystem
           onContinue={() => setShowMission(false)}
+        />
+      )}
+
+      {/* BACKGROUND CREDIT */}
+      <div className="background-credit">
+        <span>BACKGROUND ART</span>
+        <strong>Source by:steamcommunity.com</strong>
+      </div>
+
+      {/* INITIAL SYSTEM */}
+      {showIntro && (
+        <SystemIntro
+          onStart={() => setShowIntro(false)}
         />
       )}
     </>
