@@ -189,40 +189,40 @@ export default function About() {
           <div className="hobbies-list">
             {[
               {
-                name: "Gaming",
-                image: "/hobbies/Gaming.jpg",
-                type: "RECREATION",
-                rarity: "MYTHIC",
-                icon: "◉",
-              },
-              {
-                name: "Football",
-                image: "/hobbies/Football.jpg",
-                type: "PHYSICAL",
-                rarity: "UNCOMMON",
-                icon: "⚡",
-              },
-              {
-                name: "Swimming",
-                image: "/hobbies/Swimming.jpg",
-                type: "PHYSICAL",
-                rarity: "UNCOMMON",
-                icon: "◇",
-              },
-              {
-                name: "Exploring Technology",
-                image: "/hobbies/Tecnology.jpg",
-                type: "EXPLORATION",
-                rarity: "EPIC",
-                icon: "✦",
-              },
-              {
-                name: "Adventure",
-                image: "/hobbies/Adventure.jpg",
-                type: "ADVENTURE",
-                rarity: "LEGENDARY",
-                icon: "◆",
-              },
+  name: "Gaming",
+  image: "/Hobbies/Gaming.jpg",
+  type: "RECREATION",
+  rarity: "MYTHIC",
+  icon: "◉",
+},
+{
+  name: "Football",
+  image: "/Hobbies/Football.jpg",
+  type: "PHYSICAL",
+  rarity: "UNCOMMON",
+  icon: "⚡",
+},
+{
+  name: "Swimming",
+  image: "/Hobbies/Swimming.jpg",
+  type: "PHYSICAL",
+  rarity: "UNCOMMON",
+  icon: "◇",
+},
+{
+  name: "Exploring Technology",
+  image: "/Hobbies/Tecnology.jpg",
+  type: "EXPLORATION",
+  rarity: "EPIC",
+  icon: "✦",
+},
+{
+  name: "Adventure",
+  image: "/Hobbies/Adventure.jpg",
+  type: "ADVENTURE",
+  rarity: "LEGENDARY",
+  icon: "◆",
+},
             ].map((hobby, index) => (
               <div
                 className="hobby-card"
