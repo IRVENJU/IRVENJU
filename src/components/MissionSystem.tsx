@@ -49,7 +49,7 @@ prev === missions.length - 1 ? 0 : prev + 1
 return ( <div className="mission-system"> <div className="mission-system-header"> <span>SYSTEM</span> <span>01:26</span> </div>
   
   <div className="mission-system-title">
-    CURRENT MISSIONS
+    CURRENT QUETS
   </div>
 
   <div className="mission-card">
@@ -59,7 +59,7 @@ return ( <div className="mission-system"> <div className="mission-system-header"
 
     <div className="mission-content">
       <span className="mission-label">
-        CURRENT MISSION
+        CURRENT QUEST
       </span>
 
       <h2>{mission.title}</h2>

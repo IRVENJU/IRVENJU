@@ -71,7 +71,7 @@ export default function SystemIntro({ onStart }: Props) {
               className="system-start-button"
               onClick={onStart}
             >
-              START
+              PRESS START
             </button>
           </>
         )}
