@@ -204,7 +204,7 @@ export default function About() {
 },
 {
   name: "Swimming",
-  image: "/Hobbies/Swimming.jpg",
+  image: "/Hobbies/swimming.jpg",
   type: "PHYSICAL",
   rarity: "UNCOMMON",
   icon: "◇",
