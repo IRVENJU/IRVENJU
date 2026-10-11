@@ -1,0 +1,41 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/app/about/about.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+
+.about_page__hxz1O {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+  background: #020308;
+  color: white;
+}
+
+.about_videoBackground__0XKIV {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.about_videoOverlay__4fcSI {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(2, 3, 8, 0.55);
+  pointer-events: none;
+}
+
+.about_content__qlzG3 {
+  position: relative;
+  z-index: 2;
+}
+
+.about_page__hxz1O > .shadow-bg,
+.about_page__hxz1O > .shadow-grid {
+  display: none;
+}

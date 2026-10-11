@@ -1,68 +1,111 @@
-import { ArrowUpRight, Mail, Github, Instagram } from "lucide-react";
+
+import {
+  ArrowUpRight,
+  Mail,
+  Github,
+  Instagram,
+} from "lucide-react";
+
 import { portfolio } from "@/data/portfolio";
 import BackHome from "@/components/BackHome";
+import styles from "./contact.module.css";
+
+const socialLinks = [
+  {
+    name: "GitHub",
+    href: portfolio.socials.github,
+    Icon: Github,
+  },
+  {
+    name: "Instagram",
+    href: portfolio.socials.instagram,
+    Icon: Instagram,
+  },
+  {
+    name: "Email",
+    href: portfolio.socials.email,
+    Icon: Mail,
+  },
+];
 
 export default function Contact() {
   return (
     <>
       <BackHome />
 
-      <div className="relative z-10 container-main pt-40 pb-24 min-h-screen">
-        <p className="mono text-xs text-cyan tracking-[.3em]">
-          04 / CONTACT
-        </p>
+      <main className={styles.contactPage}>
+        <video
+          className={styles.videoBackground}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source
+            src="/contact-bg.mp4"
+            type="video/mp4"
+          />
+        </video>
 
-        <h1 className="mt-5 text-5xl md:text-7xl font-semibold tracking-[-.05em]">
-          Let's Connect.
-        </h1>
+        <div className={styles.videoOverlay} />
 
-        <p className="max-w-xl text-zinc-500 leading-7 mt-8">
-          ingin berkolaborasi, atau sekadar ingin mengobrol tentang teknologi?
-          just call me
-        </p>
+        <div className={styles.container}>
+          <p className={styles.eyebrow}>
+            04 / CONTACT
+          </p>
 
-        <div className="grid sm:grid-cols-3 gap-4 mt-14 max-w-3xl">
-          <a
-            href={portfolio.socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card rounded-2xl p-6 hover:border-cyan/40"
-          >
-            <Github size={20} />
+          <h1 className={styles.heading}>
+            Let's Connect.
+          </h1>
 
-            <p className="mt-8 text-sm">
-              GitHub{" "}
-              <ArrowUpRight className="inline" size={13} />
-            </p>
-          </a>
+          <p className={styles.description}>
+            Ingin berkolaborasi atau sekadar mengobrol
+            tentang teknologi? Just call me.
+          </p>
 
-          <a
-            href={portfolio.socials.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card rounded-2xl p-6 hover:border-cyan/40"
-          >
-            <Instagram size={20} />
+          <div className={styles.socialGrid}>
+            {socialLinks.map(({ name, href, Icon }) => {
+              const isEmail = name === "Email";
 
-            <p className="mt-8 text-sm">
-              Instagram{" "}
-              <ArrowUpRight className="inline" size={13} />
-            </p>
-          </a>
+              const linkHref =
+                isEmail && href && !href.startsWith("mailto:")
+                  ? `mailto:${href}`
+                  : href;
 
-          <a
-            href={portfolio.socials.email}
-            className="card rounded-2xl p-6 hover:border-cyan/40"
-          >
-            <Mail size={20} />
+              return (
+                <a
+                  key={name}
+                  href={linkHref}
+                  target={isEmail ? undefined : "_blank"}
+                  rel={
+                    isEmail
+                      ? undefined
+                      : "noopener noreferrer"
+                  }
+                  className={styles.socialCard}
+                >
+                  <Icon
+                    size={22}
+                    className={styles.socialIcon}
+                    aria-hidden="true"
+                  />
 
-            <p className="mt-8 text-sm">
-              Email{" "}
-              <ArrowUpRight className="inline" size={13} />
-            </p>
-          </a>
+                  <span className={styles.socialLabel}>
+                    {name}
+                    <ArrowUpRight
+                      size={16}
+                      className={styles.arrow}
+                      aria-hidden="true"
+                    />
+                  </span>
+                </a>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

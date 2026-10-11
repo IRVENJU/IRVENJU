@@ -3,58 +3,84 @@
 
 import BackHome from "@/components/BackHome";
 import { portfolio } from "@/data/portfolio";
+import styles from "./about.module.css";
 
 const skillStats = [
-  {
-    name: "NETWORKING",
-    short: "𖣘",
-    level: 80,
-    rank: "A",
-  },
-  {
-    name: "PROBLEM SOLVING",
-    short: "𓆩✧𓆪",
-    level: 85,
-    rank: "A",
-  },
-  {
-    name: "CYBERSECURITY",
-    short: "𖤓",
-    level: 70,
-    rank: "B",
-  },
-  {
-    name: "PROGRAMMING",
-    short: "✮",
-    level: 65,
-    rank: "C",
-  },
-  {
-    name: "WEB DEVELOPMENT",
-    short: "◈",
-    level: 75,
-    rank: "B",
-  },
-  {
-    name: "LINUX",
-    short: "⌘",
-    level: 70,
-    rank: "B",
-  },
+  { name: "NETWORKING", short: "𖣘", level: 80, rank: "A" },
+  { name: "PROBLEM SOLVING", short: "𓆩✧𓆪", level: 85, rank: "A" },
+  { name: "CYBERSECURITY", short: "𖤓", level: 70, rank: "B" },
+  { name: "PROGRAMMING", short: "✮", level: 65, rank: "C" },
+  { name: "WEB DEVELOPMENT", short: "◈", level: 75, rank: "B" },
+  { name: "LINUX", short: "⌘", level: 70, rank: "B" },
 ];
 
 const overallLevel = 100;
 
+const hobbies = [
+  {
+    name: "Gaming",
+    image: "/Hobbies/Gaming.jpg",
+    type: "RECREATION",
+    rarity: "MYTHIC",
+    icon: "◉",
+  },
+  {
+    name: "Football",
+    image: "/Hobbies/Football.jpg",
+    type: "PHYSICAL",
+    rarity: "UNCOMMON",
+    icon: "⚡",
+  },
+  {
+    name: "Swimming",
+    image: "/Hobbies/Swimming.jpg",
+    type: "PHYSICAL",
+    rarity: "UNCOMMON",
+    icon: "◇",
+  },
+  {
+    name: "Exploring Technology",
+    image: "/Hobbies/Tecnology.jpg",
+    type: "EXPLORATION",
+    rarity: "EPIC",
+    icon: "✦",
+  },
+  {
+    name: "Adventure",
+    image: "/Hobbies/Adventure.jpg",
+    type: "ADVENTURE",
+    rarity: "LEGENDARY",
+    icon: "◆",
+  },
+];
+
 export default function About() {
   return (
-    <main className="shadow-page">
+    <main className={`${styles.page} shadow-page`}>
+      {/* VIDEO BACKGROUND */}
+      <video
+        className={styles.videoBackground}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="/about-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* DARK OVERLAY */}
+      <div className={styles.videoOverlay} />
+
+      {/* EXISTING NAVIGATION */}
       <BackHome />
 
+      {/* EXISTING DECORATIONS */}
       <div className="shadow-bg" />
       <div className="shadow-grid" />
 
-      <div className="shadow-container">
-
+      <div className={`shadow-container ${styles.content}`}>
         {/* HEADER */}
         <div className="system-header">
           <div>
@@ -156,17 +182,9 @@ export default function About() {
                     EDUCATION #{String(index + 1).padStart(2, "0")}
                   </span>
 
-                  <h4>
-                    {item.school}
-                  </h4>
-
-                  <strong>
-                    {item.major}
-                  </strong>
-
-                  <p>
-                    {item.description}
-                  </p>
+                  <h4>{item.school}</h4>
+                  <strong>{item.major}</strong>
+                  <p>{item.description}</p>
                 </div>
               </div>
             ))}
@@ -187,49 +205,12 @@ export default function About() {
           </div>
 
           <div className="hobbies-list">
-            {[
-              {
-  name: "Gaming",
-  image: "/Hobbies/Gaming.jpg",
-  type: "RECREATION",
-  rarity: "MYTHIC",
-  icon: "◉",
-},
-{
-  name: "Football",
-  image: "/Hobbies/Football.jpg",
-  type: "PHYSICAL",
-  rarity: "UNCOMMON",
-  icon: "⚡",
-},
-{
-  name: "Swimming",
-  image: "/Hobbies/swimming.jpg",
-  type: "PHYSICAL",
-  rarity: "UNCOMMON",
-  icon: "◇",
-},
-{
-  name: "Exploring Technology",
-  image: "/Hobbies/Tecnology.jpg",
-  type: "EXPLORATION",
-  rarity: "EPIC",
-  icon: "✦",
-},
-{
-  name: "Adventure",
-  image: "/Hobbies/Adventure.jpg",
-  type: "ADVENTURE",
-  rarity: "LEGENDARY",
-  icon: "◆",
-},
-            ].map((hobby, index) => (
+            {hobbies.map((hobby, index) => (
               <div
                 className="hobby-card"
                 key={hobby.name}
               >
                 <div className="hobby-card-inner">
-
                   {/* FRONT */}
                   <div className="hobby-face hobby-front">
                     <div className="hobby-card-glow" />
@@ -256,18 +237,11 @@ export default function About() {
                         {hobby.type}
                       </span>
 
-                      <h4>
-                        {hobby.name}
-                      </h4>
+                      <h4>{hobby.name}</h4>
 
                       <div className="hobby-card-bottom">
-                        <span>
-                          PLAYER ACTIVITY
-                        </span>
-
-                        <strong>
-                          {hobby.icon}
-                        </strong>
+                        <span>PLAYER ACTIVITY</span>
+                        <strong>{hobby.icon}</strong>
                       </div>
                     </div>
                   </div>
@@ -282,38 +256,29 @@ export default function About() {
                       {hobby.icon}
                     </div>
 
-                    <h4>
-                      {hobby.name}
-                    </h4>
+                    <h4>{hobby.name}</h4>
 
                     <div className="hobby-back-line" />
 
                     <div className="hobby-back-data">
                       <span>CATEGORY</span>
-                      <strong>
-                        {hobby.type}
-                      </strong>
+                      <strong>{hobby.type}</strong>
                     </div>
 
                     <div className="hobby-back-data">
                       <span>RARITY</span>
-                      <strong>
-                        {hobby.rarity}
-                      </strong>
+                      <strong>{hobby.rarity}</strong>
                     </div>
 
                     <div className="hobby-back-data">
                       <span>STATUS</span>
-                      <strong>
-                        ACTIVE
-                      </strong>
+                      <strong>ACTIVE</strong>
                     </div>
 
                     <div className="hobby-back-footer">
                       IRVENJU PLAYER DATA
                     </div>
                   </div>
-
                 </div>
               </div>
             ))}
@@ -324,7 +289,7 @@ export default function About() {
         <section className="attributes-section">
           <div className="attributes-header">
             <div>
-              <span></span>
+              <span />
               <h3>PLAYER ATTRIBUTE</h3>
             </div>
 
@@ -339,7 +304,6 @@ export default function About() {
               <span>PLAYER ATTRIBUTE</span>
             </div>
 
-            {/* MAIN LEVEL */}
             <div className="overall-level-box">
               <div className="overall-level-number">
                 <span>LV.</span>
@@ -351,9 +315,7 @@ export default function About() {
 
                 <div className="overall-level-bar">
                   <span
-                    style={{
-                      width: `${overallLevel}%`,
-                    }}
+                    style={{ width: `${overallLevel}%` }}
                   />
                 </div>
 
@@ -363,7 +325,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* SKILLS */}
             <div className="attribute-list">
               {skillStats.map((skill) => (
                 <div
@@ -371,13 +332,8 @@ export default function About() {
                   key={skill.name}
                 >
                   <div className="attribute-type">
-                    <strong>
-                      {skill.short}
-                    </strong>
-
-                    <span>
-                      {skill.name}
-                    </span>
+                    <strong>{skill.short}</strong>
+                    <span>{skill.name}</span>
                   </div>
 
                   <div className="attribute-progress">
@@ -387,9 +343,7 @@ export default function About() {
 
                     <div className="attribute-bar">
                       <span
-                        style={{
-                          width: `${skill.level}%`,
-                        }}
+                        style={{ width: `${skill.level}%` }}
                       />
                     </div>
                   </div>
@@ -402,13 +356,8 @@ export default function About() {
             </div>
 
             <div className="attribute-footer">
-              <span>
-                PLAYER ATTRIBUTE
-              </span>
-
-              <strong>
-                LV.{overallLevel}
-              </strong>
+              <span>PLAYER ATTRIBUTE</span>
+              <strong>LV.{overallLevel}</strong>
             </div>
           </div>
         </section>
@@ -417,7 +366,7 @@ export default function About() {
         <section className="evolution-section">
           <div className="evolution-header">
             <div>
-              <span></span>
+              <span />
               <h3>PLAYER OBJECTIVE</h3>
             </div>
 
@@ -488,7 +437,6 @@ export default function About() {
             <span>KEEP MOVING // KEEP EVOLVING</span>
           </div>
         </section>
-
       </div>
     </main>
   );

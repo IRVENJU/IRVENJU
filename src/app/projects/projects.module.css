@@ -1,0 +1,359 @@
+
+.page {
+  --cyan: #00d9ff;
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #020308;
+  color: #f4f7fb;
+}
+
+.videoBackground {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2, 3, 8, 0.94) 0%,
+      rgba(2, 3, 8, 0.78) 55%,
+      rgba(2, 3, 8, 0.88) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(2, 3, 8, 0.9),
+      transparent 45%,
+      rgba(2, 3, 8, 0.35)
+    );
+}
+
+.gridBackground {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.13;
+  background-image:
+    linear-gradient(rgba(0, 217, 255, 0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.13) 1px, transparent 1px);
+  background-size: 55px 55px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 145px 0 32px;
+}
+
+.header {
+  max-width: 720px;
+  margin-bottom: 56px;
+  animation: reveal 0.7s ease both;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cyan);
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+}
+
+.title {
+  margin-top: 22px;
+  font-size: clamp(44px, 7vw, 76px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.065em;
+}
+
+.title span {
+  color: var(--cyan);
+  text-shadow: 0 0 32px rgba(0, 217, 255, 0.22);
+}
+
+.subtitle {
+  max-width: 550px;
+  margin-top: 20px;
+  color: #9ca7b8;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 26px;
+  color: #718092;
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.projectCard {
+  position: relative;
+  display: flex;
+  min-height: 290px;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(13, 20, 31, 0.82),
+    rgba(4, 7, 13, 0.75)
+  );
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+  animation: reveal 0.65s ease both;
+}
+
+.projectCard:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.projectCard:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.projectCard:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.projectCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 217, 255, 0.48);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 217, 255, 0.09),
+    rgba(4, 7, 13, 0.9)
+  );
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.28);
+}
+
+.cardTop,
+.cardBottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.projectNumber {
+  color: #778597;
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.arrow {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  color: #8995a5;
+  transition: 0.3s ease;
+}
+
+.projectCard:hover .arrow {
+  transform: rotate(45deg);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+  margin: 30px 0;
+}
+
+.category {
+  color: var(--cyan);
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.projectTitle {
+  margin-top: 10px;
+  font-size: clamp(21px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+}
+
+.description {
+  max-width: 480px;
+  margin-top: 12px;
+  color: #929eaf;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.stackTag {
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  color: #a0abba;
+  font-family: monospace;
+  font-size: 9px;
+}
+
+.viewProject {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 5px;
+  color: #78889a;
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease;
+}
+
+.projectCard:hover .viewProject {
+  color: var(--cyan);
+}
+
+.cardAccent {
+  position: absolute;
+  right: -50px;
+  bottom: -70px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(0, 217, 255, 0.06);
+  filter: blur(35px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.projectCard:hover .cardAccent {
+  opacity: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 38px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  color: #647184;
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: calc(100% - 32px);
+    padding-top: 115px;
+  }
+
+  .header {
+    margin-bottom: 34px;
+  }
+
+  .title {
+    font-size: clamp(42px, 12vw, 60px);
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .projectCard {
+    min-height: 265px;
+    padding: 21px;
+  }
+
+  .cardContent {
+    margin: 26px 0;
+  }
+
+  .footer {
+    font-size: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectCard,
+  .header {
+    animation: none;
+  }
+
+  .projectCard,
+  .arrow,
+  .viewProject {
+    transition: none;
+  }
+}

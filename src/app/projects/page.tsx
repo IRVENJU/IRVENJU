@@ -1,65 +1,106 @@
+
+"use client";
+
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Swords } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
 import BackHome from "@/components/BackHome";
+import styles from "./projects.module.css";
 
 export default function Projects() {
- return (
-  <>
-    <BackHome />
+  return (
+    <main className={styles.page}>
+      {/* Background video */}
+      <video
+        className={styles.videoBackground}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="/projects-bg.mp4" type="video/mp4" />
+      </video>
 
-    <div className="relative z-10 container-main pt-40 pb-24">
-      <p className="mono text-xs text-cyan tracking-[.3em]">
-        02 / PROJECTS
-      </p>
+      <div className={styles.overlay} />
+      <div className={styles.gridBackground} />
 
-      <h1 className="mt-5 text-5xl md:text-7xl font-semibold tracking-[-.05em]">
-        Selected Work.
-      </h1>
+      <BackHome />
 
-      <div className="grid md:grid-cols-2 gap-5 mt-16">
-        {portfolio.projects.map((project, i) => (
-          <Link
-            key={project.title}
-            href={project.link}
-            className="card rounded-3xl p-7 min-h-72 transition duration-300 group"
-          >
-            <div className="flex justify-between">
-              <span className="mono text-xs text-cyan">
-                0{i + 1}
-              </span>
+      <section className={styles.container}>
+        <div className={styles.header}>
+          <div className={styles.eyebrow}>
+            <Swords size={15} />
+            <span>HUNTER ARCHIVE / 02</span>
+          </div>
 
-              <ArrowUpRight
-                size={18}
-                className="text-zinc-600 group-hover:text-cyan transition"
-              />
-            </div>
+          <h1 className={styles.title}>
+            Selected <span>Work.</span>
+          </h1>
 
-            <p className="mono text-[10px] text-zinc-600 mt-14 tracking-widest">
-              {project.category}
-            </p>
+          <p className={styles.subtitle}>
+            A collection of projects, experiments, and skills developed
+            throughout my journey in technology.
+          </p>
 
-            <h2 className="text-2xl font-semibold mt-2">
-              {project.title}
-            </h2>
+          <div className={styles.status}>
+            <span className={styles.statusDot} />
+            SYSTEM DATABASE: {portfolio.projects.length} PROJECTS FOUND
+          </div>
+        </div>
 
-            <p className="text-sm text-zinc-500 leading-6 mt-3">
-              {project.description}
-            </p>
-
-            <div className="flex flex-wrap gap-2 mt-5">
-              {project.stack.map((item) => (
-                <span
-                  key={item}
-                  className="text-[10px] border border-white/10 rounded-full px-2 py-1 text-zinc-500"
-                >
-                  {item}
+        <div className={styles.projectGrid}>
+          {portfolio.projects.map((project, i) => (
+            <Link
+              key={project.title}
+              href={project.link}
+              className={styles.projectCard}
+            >
+              <div className={styles.cardTop}>
+                <span className={styles.projectNumber}>
+                  PROJECT_{String(i + 1).padStart(2, "0")}
                 </span>
-              ))}
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  </>
-);}
+
+                <span className={styles.arrow}>
+                  <ArrowUpRight size={19} />
+                </span>
+              </div>
+
+              <div className={styles.cardContent}>
+                <p className={styles.category}>{project.category}</p>
+
+                <h2 className={styles.projectTitle}>{project.title}</h2>
+
+                <p className={styles.description}>
+                  {project.description}
+                </p>
+              </div>
+
+              <div className={styles.cardBottom}>
+                <div className={styles.stack}>
+                  {project.stack.map((item) => (
+                    <span key={item} className={styles.stackTag}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <span className={styles.viewProject}>
+                  ACCESS <ArrowUpRight size={13} />
+                </span>
+              </div>
+
+              <div className={styles.cardAccent} />
+            </Link>
+          ))}
+        </div>
+
+        <footer className={styles.footer}>
+          <span>REFI. / PERSONAL DATABASE</span>
+          <span>END OF RECORDS</span>
+        </footer>
+      </section>
+    </main>
+  );
+}
